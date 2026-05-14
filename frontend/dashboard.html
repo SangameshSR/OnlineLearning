@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Courses</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>My Courses</h1>
+
+     <nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="courses.html">Courses</a>
+
+    <a href="dashboard.html">My Courses</a>
+
+    <a href="admin.html">Admin</a>
+
+    <a href="#"
+       onclick="logoutUser()">
+
+        Logout
+
+    </a>
+
+</nav>
+
+    </header>
+
+    <!-- DASHBOARD SECTION -->
+
+    <section class="courses-section">
+
+        <h2>Enrolled Courses</h2>
+
+        <div
+            id="dashboardContainer"
+            class="course-container">
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Online Learning Platform
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // LOGOUT FUNCTION
+
+        function logoutUser(){
+
+            alert("Logged Out Successfully");
+
+            window.location.href =
+                "login.html";
+        }
+
+        // DASHBOARD CONTAINER
+
+        const dashboardContainer =
+            document.getElementById(
+                "dashboardContainer"
+            );
+
+        // GET ENROLLED COURSES
+
+        let courses =
+            JSON.parse(
+                localStorage.getItem(
+                    "myCourses"
+                )
+            ) || [];
+
+        // LOAD DASHBOARD
+
+        function loadDashboard(){
+
+            dashboardContainer.innerHTML = "";
+
+            // EMPTY COURSES
+
+            if(courses.length === 0){
+
+                dashboardContainer.innerHTML =
+
+                `
+                <div class="course-card">
+
+                    <h2>No Enrolled Courses</h2>
+
+                    <p>
+                        Enroll in courses from the
+                        Courses page.
+                    </p>
+
+                </div>
+                `;
+
+                return;
+            }
+
+            // DISPLAY COURSES
+
+            courses.forEach((course,index)=>{
+
+                const card =
+                    document.createElement("div");
+
+                card.classList.add("course-card");
+
+                card.innerHTML = `
+
+                    <h3>${course.title}</h3>
+
+                    <p>${course.description}</p>
+
+                    <p>
+                        <strong>Progress:</strong>
+                        ${course.progress}%
+                    </p>
+
+                    <progress
+                        value="${course.progress}"
+                        max="100">
+                    </progress>
+
+                    <br><br>
+
+                    <button
+                        onclick="updateProgress(${index})">
+
+                        Complete Lesson
+
+                    </button>
+
+                `;
+
+                dashboardContainer
+                .appendChild(card);
+            });
+        }
+
+        // UPDATE PROGRESS
+
+        function updateProgress(index){
+
+            if(courses[index].progress < 100){
+
+                courses[index].progress += 20;
+
+                if(courses[index].progress > 100){
+
+                    courses[index].progress = 100;
+                }
+
+                localStorage.setItem(
+
+                    "myCourses",
+
+                    JSON.stringify(courses)
+
+                );
+
+                loadDashboard();
+            }
+        }
+
+        // INITIAL LOAD
+
+        loadDashboard();
+
+    </script>
+
+</body>
+
+</html>

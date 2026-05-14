@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#f4f7fb;
+        }
+
+        .admin-header{
+            background:linear-gradient(135deg,#0077ff,#00c6ff);
+            color:white;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        .admin-header h1{
+            margin:0;
+        }
+
+        .admin-header nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            font-weight:bold;
+        }
+
+        .admin-container{
+            max-width:1100px;
+            margin:40px auto;
+            padding:20px;
+        }
+
+        .admin-top{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:20px;
+            margin-bottom:30px;
+        }
+
+        .stat-card{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            text-align:center;
+            transition:0.3s;
+        }
+
+        .stat-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .stat-card h2{
+            margin:10px 0;
+            color:#0077ff;
+            font-size:32px;
+        }
+
+        .admin-form{
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .admin-form h2{
+            margin-bottom:25px;
+            color:#222;
+        }
+
+        .input-group{
+            margin-bottom:20px;
+        }
+
+        .input-group label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#333;
+        }
+
+        .input-group input,
+        .input-group textarea{
+            width:100%;
+            padding:14px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            font-size:16px;
+            box-sizing:border-box;
+        }
+
+        .input-group textarea{
+            resize:none;
+            height:120px;
+        }
+
+        .add-btn{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#0077ff;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .add-btn:hover{
+            background:#005ed1;
+        }
+
+        .success-msg{
+            margin-top:20px;
+            color:green;
+            font-weight:bold;
+            text-align:center;
+        }
+
+        footer{
+            margin-top:40px;
+            background:#0077ff;
+            color:white;
+            text-align:center;
+            padding:15px;
+        }
+
+        @media(max-width:768px){
+
+            .admin-header{
+                flex-direction:column;
+                text-align:center;
+            }
+
+            .admin-header nav{
+                margin-top:15px;
+            }
+
+            .admin-header nav a{
+                display:inline-block;
+                margin:10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="admin-header">
+
+        <h1>Admin Dashboard</h1>
+
+        <nav>
+
+            <a href="courses.html">Courses</a>
+
+            <a href="dashboard.html">
+                My Courses
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+    <!-- MAIN CONTAINER -->
+
+    <div class="admin-container">
+
+        <!-- STATISTICS -->
+
+        <div class="admin-top">
+
+            <div class="stat-card">
+
+                <h3>Available Courses</h3>
+
+                <h2>4</h2>
+
+                
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Enrolled Students</h3>
+
+                <h2>2</h2>
+
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Project Features</h3>
+
+                <h2>6+</h2>
+
+
+            </div>
+
+        </div>
+
+        <!-- ADD COURSE FORM -->
+
+        <div class="admin-form">
+
+            <h2>Add New Course</h2>
+
+            <div class="input-group">
+
+                <label>Course Title</label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter course title"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Course Description</label>
+
+                <textarea
+                    id="description"
+                    placeholder="Enter course description">
+                </textarea>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Course Duration</label>
+
+                <input
+                    type="text"
+                    id="duration"
+                    placeholder="Example: 6 Weeks"
+                >
+
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addCourse()">
+
+                Add Course
+
+            </button>
+
+            <div class="success-msg"
+                 id="message">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Online Learning Platform
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        async function addCourse(){
+
+            const course = {
+
+                title:
+                    document.getElementById(
+                        "title"
+                    ).value,
+
+                description:
+                    document.getElementById(
+                        "description"
+                    ).value,
+
+                duration:
+                    document.getElementById(
+                        "duration"
+                    ).value,
+
+                progress:0
+            };
+
+            const response = await fetch(
+
+                "http://localhost:8080/courses",
+
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+
+                    body:JSON.stringify(course)
+                }
+            );
+
+            if(response.ok){
+
+                document.getElementById(
+                    "message"
+                ).innerHTML =
+                "Course Added Successfully";
+
+                document.getElementById(
+                    "title"
+                ).value = "";
+
+                document.getElementById(
+                    "description"
+                ).value = "";
+
+                document.getElementById(
+                    "duration"
+                ).value = "";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
+

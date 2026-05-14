@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Courses</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>Online Learning Platform</h1>
+<nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="courses.html">Courses</a>
+
+    <a href="dashboard.html">My Courses</a>
+
+    <a href="admin.html">Admin</a>
+
+    <a href="#"
+       onclick="logoutUser()">
+
+        Logout
+
+    </a>
+
+</nav>
+
+    </header>
+
+    <!-- COURSES SECTION -->
+
+    <section class="courses-section">
+
+        <h2>Available Courses</h2>
+
+        <!-- SEARCH INPUT -->
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search courses..."
+        >
+
+        <!-- COURSE CONTAINER -->
+
+        <div
+            id="courseContainer"
+            class="course-container">
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Online Learning Platform
+        </p>
+
+    </footer>
+
+    <!-- LOGOUT SCRIPT -->
+
+    <script>
+
+        function logoutUser(){
+
+            alert("Logged Out Successfully");
+
+            window.location.href =
+                "login.html";
+        }
+
+    </script>
+
+    <!-- APP JS -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
