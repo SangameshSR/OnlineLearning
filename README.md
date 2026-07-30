@@ -16,7 +16,6 @@ An Online Learning Platform developed using HTML, CSS, JavaScript, Java, and Spr
 - Authentication Pages
 
 ---
-
 ## Technologies Used
 
 ### Frontend
